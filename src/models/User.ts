@@ -10,7 +10,7 @@ const options = {
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 60000,
 };
-const uri = process.env['MONGODB_URI'];
+const uri = process.env['VITE_MONGO_URI'];
 connect(uri, options);
 
 interface User {
@@ -43,9 +43,8 @@ userSchema.methods.login = async function (email: string, password: string): Pro
     const checkUser: User = await UserModel.findOne({
         email: email
     });
-
     const checkPass: boolean = await bcrypt.compare(password, checkUser.password);
     return checkPass;
 }
 
-const UserModel = model<User>('User', userSchema);
+export const UserModel = model<User>('User', userSchema);
