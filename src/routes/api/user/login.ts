@@ -9,10 +9,10 @@ export async function post(req) {
         email, password
     };
     const user = new UserModel(userDoc);
-    const registered: User = await user.register(req.body.email, req.body.password);
+    const loggedin: boolean = await user.login(req.body.email, req.body.password);
     return {
         body: {
-            registered
+            loggedin
         }
     };
 }
