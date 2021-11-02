@@ -1,15 +1,31 @@
 import { model, Schema, connect} from 'mongoose';
+import type { IGuest } from './Guest';
+import dotenv from 'dotenv';
+dotenv.config()
+const uri = process.env['MONGODB_URI'];
 
-export declare interface IResturantRes {
-    link: string,
+declare interface IResturantRes {
     date: Date,
-    guestNb: number
+    guest: IGuest
 }
 
-export const ResturantResSchema: Schema = new Schema({
-    link: String,
+const ResturantResSchema: Schema = new Schema({
     date: { type: Date, required: true },
-    guestNb: Number
+    guest: { type: 'ObjectId', ref: 'Guest', required: true }
 });
 
-export const ResturantResModel = model<IResturantRes>('ResturantRes', ResturantResSchema);
+const ResturantResModel = model<IResturantRes>('ResturantRes', ResturantResSchema);
+
+ResturantResSchema.methods.createResturantRes = async function(date:Date, guest:IGuest) {
+        await connect(uri), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        };
+
+        const res = new ResturantResModel({
+            date: date,
+            guest: guest
+        });
+
+        await res.save()
+    }
