@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+import { Schema, model, connect, ObjectId } from 'mongoose';
 import type { IGuest } from './Guest';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -14,6 +14,7 @@ const uri = process.env['MONGODB_URI'];
 connect(uri, options);
 
 interface User {
+    _id?: ObjectId,
     email: string,
     password: string,
     guest?: IGuest,
@@ -27,19 +28,24 @@ const userSchema = new Schema({
 
 userSchema.index({ email: 1 });
 
-userSchema.methods.register = async function (email: string, password: string) {
+userSchema.methods.register = async function (email: string, password: string): Promise<User> {
     const hashedPass = await bcrypt.hash(password, saltRounds);
     const newDoc: User = {
         email: email,
         password: hashedPass
     };
     const newUser = new UserModel(newDoc);
-    newUser.save();
-    // return something to signify the user is signed in
+    const savedUser: User = await newUser.save();
+    return savedUser;
 }
 
-userSchema.methods.login = async function (email: string, password: string) {
+userSchema.methods.login = async function (email: string, password: string): Promise<boolean>  {
+    const checkUser: User = await UserModel.findOne({
+        email: email
+    });
 
+    const checkPass: boolean = await bcrypt.compare(password, checkUser.password);
+    return checkPass;
 }
 
 const UserModel = model<User>('User', userSchema);
