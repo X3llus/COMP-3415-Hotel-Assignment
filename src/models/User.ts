@@ -2,6 +2,7 @@ import { Schema, model, connect } from 'mongoose';
 import type { IGuest } from './Guest';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+dotenv.config();
 const saltRounds: number = 10;
 
 const options = {
@@ -37,7 +38,7 @@ userSchema.methods.register = async function (email: string, password: string) {
     // return something to signify the user is signed in
 }
 
-userSchema.methods.login = async function () {
+userSchema.methods.login = async function (email: string, password: string) {
 
 }
 
