@@ -1,6 +1,6 @@
 import { Schema, model, connect } from 'mongoose';
 
-export declare interface IGuest {
+export interface IGuest {
     fName: string,
     lName: string,
     title: string,
@@ -8,7 +8,7 @@ export declare interface IGuest {
     address: string,
 }
 
-export const schema = new Schema({
+var schema = new Schema({
     fName: { type: String, required: true },
     lName: { type: String, required: true },
     title: { type: String, required: true },
@@ -17,3 +17,4 @@ export const schema = new Schema({
 });
 
 export const GuestModel = model<IGuest>('Guest', schema);
+
