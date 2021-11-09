@@ -14,28 +14,28 @@ const options = {
  */
 
 export interface IResturantRes {
-    //id: string
+    //id: IGuest
     date: Date;
-    guest: IGuest;
-    createResturantRes?(date: Date, guest: IGuest): Promise<IResturantRes>;
-    getResturantRes?(guest: IGuest): Promise<IResturantRes[]>;
+    guestNb: number;
+    createResturantRes?(date: Date, guestNb: number): Promise<IResturantRes>;
+    getResturantRes?(link: IGuest): Promise<IResturantRes[]>;
     updateResturantRes?(res: IResturantRes): Promise<IResturantRes>;
     deleteResturantRes?(res: IResturantRes): Promise<IResturantRes>;
 }
 
 const ResturantResSchema: Schema = new Schema({
-    //id: { type: string, required: true },
+    //id: { type: 'ObjectId', ref: 'Guest', required: true },
     date: { type: Date, required: true },
-    guest: { type: 'ObjectId', ref: 'Guest', required: true }
+    guestNb: {tyoe: Number, required: true} 
 });
 
-ResturantResSchema.methods.createResturantRes = async function (/*id: string, */date: Date, guest: IGuest): Promise<IResturantRes> {
+ResturantResSchema.methods.createResturantRes = async function (/*id: IGuest, */date: Date, guestNb: number): Promise<IResturantRes> {
     await connect(uri),options ;
     
     const res = new ResturantResModel({
-        //id: string
+        //id: IGuest
         date: date,
-        guest: guest
+        guestNb: guestNb
     });
     
     // Create and save id for reservation here
@@ -44,11 +44,11 @@ ResturantResSchema.methods.createResturantRes = async function (/*id: string, */
     return reservation;
 }
 
-ResturantResSchema.methods.getResturantRes = async function (guest: IGuest): Promise<IResturantRes[]> {
+ResturantResSchema.methods.getResturantRes = async function (link: IGuest): Promise<IResturantRes[]> {
     await connect(uri), options;
 
     const reservations: IResturantRes[] = await ResturantResModel.find({
-        guest: guest
+        link: link
     });
 
     return reservations
