@@ -16,3 +16,7 @@
 <!-- Rooms -->
 
 <!-- Packages -->
+<h2>Our Package!</h2>
+<p>Our Low price afordable package comes with some great items! Our package includes a free Breakfast, Holiday, and 
+    giant discount on all things within the resort. Someone edit this, this description sucks. -Adam
+</p>
