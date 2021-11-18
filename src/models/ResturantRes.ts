@@ -17,16 +17,16 @@ export interface IResturantRes {
     //id: IGuest
     date: Date;
     guestNb: number;
-    // createResturantRes?(date: Date, guestNb: number): Promise<IResturantRes>;
-    // getResturantRes?(link: IGuest): Promise<IResturantRes[]>;
-    // updateResturantRes?(res: IResturantRes): Promise<IResturantRes>;
-    // deleteResturantRes?(res: IResturantRes): Promise<IResturantRes>;
+    createResturantRes?(date: Date, guestNb: number): Promise<IResturantRes>;
+    getResturantRes?(link: IGuest): Promise<IResturantRes[]>;
+    updateResturantRes?(res: IResturantRes): Promise<IResturantRes>;
+    deleteResturantRes?(res: IResturantRes): Promise<IResturantRes>;
 }
 
 const ResturantResSchema: Schema = new Schema({
     //id: { type: 'ObjectId', ref: 'Guest', required: true },
     date: { type: Date, required: true },
-    guestNb: {type: Number, required: true} 
+    guestNb: {tyoe: Number, required: true} 
 });
 
 ResturantResSchema.methods.createResturantRes = async function (/*id: IGuest, */date: Date, guestNb: number): Promise<IResturantRes> {
