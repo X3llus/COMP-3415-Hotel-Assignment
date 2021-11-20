@@ -75,7 +75,7 @@
 				We often offer special packages! These usually have included meals, special access to amenities, and 
 				packages made for special holidays.
 			</p>
-			<div class="md:flex gap-4 space-y-4">
+			<div class="md:flex gap-4">
 				<div class="card rounded-lg overflow-hidden shadow-md max-w-sm">
 					<img class="w-full" src="breakfast.jpg" alt="">
 					<h1 class="font-bold text-lg py-1">Continental Breakfast</h1>
