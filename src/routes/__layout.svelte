@@ -23,7 +23,7 @@
 		<div class="flex justify-between">
 			<div>
 				<a href="/" class="flex items-center py-4 px-2">
-					<span class="font-semibold text-black text-lg">Lake Simcoe Resort</span>
+					<span class="font-bold text-black text-xl">Lake Simcoe Resort</span>
 				</a>
 			</div>
 
@@ -43,11 +43,11 @@
 					  </svg>
 				</button>
 			</div> -->
-				<div class="flex items-center space-x-1">
+				<div class="flex items-center space-x-4">
 					
-						<a href="register" class="py-1.5 px-2 rounded-lg text-black font-semibold hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Register</a>
+						<a href="register" class="py-1.5 px-2 rounded-lg text-black font-semibold ring-2 ring-gray-400 hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Register</a>
 
-						<a href="login" class="py-1.5 px-2 rounded-lg text-black font-semibold hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Login</a>
+						<a href="login" class="py-1.5 px-2 rounded-lg text-black font-semibold ring-2 ring-gray-400 hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Login</a>
 
 				</div>
 		</div>
