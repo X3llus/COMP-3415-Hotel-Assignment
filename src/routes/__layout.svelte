@@ -1,3 +1,13 @@
+<script context="module">
+	export async function load({ session }) {
+		return {
+			props: {
+				user: session.userToken
+			}
+		};
+	}
+</script>
+
 <script>
 	import '../tailwind.css';
 	const inputList = {
@@ -7,6 +17,8 @@
     };
 	let showList = false;
 	let lastInput = inputList.FRESH;
+	export let user;
+	$: console.log(user);
 
 	import { clickOutside } from '../lib/clickOutside.js';
 	function handleClickOutside(event) {

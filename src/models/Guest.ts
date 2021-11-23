@@ -1,5 +1,15 @@
 import { Schema, model, connect } from 'mongoose';
 
+export interface Address {
+    street: string;
+    city: string;
+    postal: string;
+    province: string;
+    country: string;
+}
+
+// `${this.street}, ${this.city}, ${this.province} ${this.postal}, ${this.country}`
+
 export interface IGuest {
     fName: string,
     lName: string,
