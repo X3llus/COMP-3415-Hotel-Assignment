@@ -1,17 +1,36 @@
 import { UserModel, User } from '../../../models/User';
 import * as cookie from 'cookie';
+import type { Address } from '$models/Guest';
 
-export async function post(req) {
+interface Body {
+    email: string;
+    fName: string;
+    title: string;
+    lName: string;
+    number: string;
+    address: Address;
+    password: string;
+    passwordConf: string;
+};
+
+export async function post({ body }) {
     const {
         email,
         password,
-    } = req.body;
+        passwordConf,
+        fName,
+        title,
+        lName,
+        number,
+        address,
+    }: Body = body;
+    console.log(email);
+    
     const userDoc: User = {
         email, password
     };
     const user = new UserModel(userDoc);
-    const registered: User = await user.register(req.body.email, req.body.password);
-    console.log(registered.token, registered.rToken);
+    const registered: User = await user.register(email, password);
     
     const headers = {
         'Set-Cookie': [
@@ -21,15 +40,6 @@ export async function post(req) {
                 {
                     httpOnly: true,
                     maxAge: 60 * 60 * 24 * 7,
-                    sameSite: 'strict',
-                    path: '/'
-                }
-            ),
-            cookie.serialize(
-                'refToken',
-                registered.rToken,
-                {
-                    httpOnly: true,
                     sameSite: 'strict',
                     path: '/'
                 }
