@@ -2,7 +2,6 @@ import { Schema, model, connect, ObjectId } from 'mongoose';
 import type { IGuest } from './Guest';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import * as cookie from 'cookie';
 import { v4 as uuidv4 } from 'uuid';
 dotenv.config();
 const saltRounds: number = 10;
@@ -16,16 +15,16 @@ const uri = process.env['VITE_MONGO_URI'];
 connect(uri, options);
 export interface User {
     _id?: ObjectId;
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     rToken?: string;
     token?: string;
 
     guest?: ObjectId | IGuest;
 
     register?(email: string, password: string): Promise<User>;
-    login?(email: string, password: string): Promise<boolean>;
-    checkToken?(token: string): Promise<boolean>;
+    login?(email: string, password: string): Promise<User>;
+    checkToken?(token: string): Promise<User>;
     // refreshToken?(rToken: string): Promise<string>;
 }
 
@@ -42,16 +41,13 @@ UserSchema.methods.register = async function (email: string, password: string): 
     const hashedPass = await bcrypt.hash(password, saltRounds);
 
     const token = uuidv4();
-    // const rToken = uuidv4();
 
     console.log(`token: ${token}`);
-    
 
     const newDoc: User = {
         email,
         password: hashedPass,
         token,
-        // rToken,
     };
 
     const newUser = new UserModel(newDoc);
@@ -65,6 +61,13 @@ UserSchema.methods.login = async function (email: string, password: string): Pro
     });
     const checkPass: boolean = await bcrypt.compare(password, checkUser.password);
     return checkPass;
+}
+
+UserSchema.methods.checkToken = async function (token: string): Promise<User> {
+    const user: User = await UserModel.findOne({
+        token
+    });
+    return user;
 }
 
 export const UserModel = model<User>('User', UserSchema);
