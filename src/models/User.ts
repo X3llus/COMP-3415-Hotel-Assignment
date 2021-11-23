@@ -17,7 +17,7 @@ export interface User {
     _id?: ObjectId;
     email?: string;
     password?: string;
-    rToken?: string;
+    manager?: boolean;
     token?: string;
 
     guest?: ObjectId | IGuest;
@@ -25,14 +25,13 @@ export interface User {
     register?(email: string, password: string): Promise<User>;
     login?(email: string, password: string): Promise<User>;
     checkToken?(token: string): Promise<User>;
-    // refreshToken?(rToken: string): Promise<string>;
 }
 
 const UserSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     guest: { type: 'ObjectId', ref: 'Guest', required: false },
-    // rToken: { type: String, unique: true},
+    manager: { type: Boolean, required: true, default: false },
     token: { type: String, unique: true},
 });
 UserSchema.index({ email: 1 });
@@ -41,8 +40,6 @@ UserSchema.methods.register = async function (email: string, password: string): 
     const hashedPass = await bcrypt.hash(password, saltRounds);
 
     const token = uuidv4();
-
-    console.log(`token: ${token}`);
 
     const newDoc: User = {
         email,
