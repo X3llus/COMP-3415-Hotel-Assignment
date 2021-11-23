@@ -11,7 +11,7 @@ export declare interface Package{
     description: string,
 }
 
-export const roomSchema = new Schema({
+var packageSchema = new Schema({
     breakfast: { type: String, required: true },
     holiday: { type: String, required: true },
     discount: { type: String, required: true },
