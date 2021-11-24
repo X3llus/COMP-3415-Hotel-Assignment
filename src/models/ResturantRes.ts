@@ -2,7 +2,7 @@ import { model, Schema, connect } from 'mongoose';
 import type { IGuest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
-const uri = process.env['VITE_MONGO_URI'];
+const uri = process.env['MONGO_URI'];
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
