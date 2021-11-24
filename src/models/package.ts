@@ -1,5 +1,5 @@
 import { Schema, model, connect } from 'mongoose';
-import type { IGuest } from './Guest';
+import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
 const uri = process.env['MONGO_URI'];
@@ -43,7 +43,11 @@ packageSchema.methods.createPackageRes = async function ( breakfast: boolean, ho
 }
 
 //UPDATE
+packageSchema.methods.updateHotelRes = async function ( reser: Package): Promise<Package> {
 
+    const reservation: Package = await PackageResModel.findOneAndUpdate(reser, reser);
+    return reservation;
+}
 //GET
 packageSchema.methods.getPackageRes = async function(breakfast: boolean, holiday: boolean, discount: boolean): Promise<Package> {
     
@@ -56,7 +60,11 @@ packageSchema.methods.getPackageRes = async function(breakfast: boolean, holiday
     return savedPackage;
 }
 //DELETE
+packageSchema.methods.deletePackageRes = async function (reser: Package): Promise<Package> {
 
+    const reservation: Package = await PackageResModel.findOneAndDelete(reser);
+    return reservation;
+}
 //
 export const PackageResModel = model<Package>('Package', packageSchema);
 // export default class Package {
