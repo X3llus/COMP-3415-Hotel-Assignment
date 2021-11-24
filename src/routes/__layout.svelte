@@ -29,6 +29,15 @@
 			}
 		}
 
+	let email
+	if (user != null) {
+		fetch('/api/user/token')
+		.then((response) => response.json())
+		.then((body) => {
+			email = body.email;
+		})
+	}
+
 </script>
 
 <nav class="bg-gray-100 shadow-lg border-b-2 border-red-400">
@@ -42,7 +51,7 @@
 
 			{#if user != null}
 				<div class="flex items-center space-x-1">
-					<button class="inline-flex py-4 px-2 font-mono text-gray-600 hover:text-gray-900" on:click={() => {
+					<button class="inline-flex py-4 px-2 font-mono text-gray-600 hover:text-gray-900 uppercase" on:click={() => {
 						if (lastInput == inputList.FRESH) {
 							showList = true;
 						} else if (lastInput == inputList.OUTSIDE && showList == false) {
@@ -51,7 +60,7 @@
 							showList = true;
 						}
 						lastInput = inputList.BUTTON;
-					}}>{user}
+					}}>{email}
 						<svg class="-mr-1 ml-1 h-7 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 							<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
 						</svg>
