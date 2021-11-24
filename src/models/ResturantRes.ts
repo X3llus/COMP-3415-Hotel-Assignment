@@ -1,5 +1,5 @@
 import { model, Schema, connect } from 'mongoose';
-import type { IGuest } from './Guest';
+import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
 const uri = process.env['MONGO_URI'];
@@ -18,7 +18,7 @@ export interface IResturantRes {
     date: Date;
     guestNb: number;
     createResturantRes?(date: Date, guestNb: number): Promise<IResturantRes>;
-    getResturantRes?(link: IGuest): Promise<IResturantRes[]>;
+    getResturantRes?(link: Guest): Promise<IResturantRes[]>;
     updateResturantRes?(res: IResturantRes): Promise<IResturantRes>;
     deleteResturantRes?(res: IResturantRes): Promise<IResturantRes>;
 }
@@ -44,7 +44,7 @@ ResturantResSchema.methods.createResturantRes = async function (/*id: IGuest, */
     return reservation;
 }
 
-ResturantResSchema.methods.getResturantRes = async function (link: IGuest): Promise<IResturantRes[]> {
+ResturantResSchema.methods.getResturantRes = async function (link: Guest): Promise<IResturantRes[]> {
     await connect(uri), options;
 
     const reservations: IResturantRes[] = await ResturantResModel.find({

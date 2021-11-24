@@ -1,5 +1,5 @@
 import { model, Schema, connect } from 'mongoose';
-import type { IGuest } from './Guest';
+import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
 const uri = process.env['VITE_MONGO_URI'];
@@ -13,7 +13,7 @@ export interface HotelRes {
     date: Date;
     guestNb: number;
     createHotelRes?(date: Date, guestNb: number): Promise<HotelRes>;
-    getHotelRes?(link: IGuest): Promise<HotelRes[]>;
+    getHotelRes?(link: Guest): Promise<HotelRes[]>;
     updateHotelRes?(res: HotelRes): Promise<HotelRes>;
     deleteHotelRes?(res: HotelRes): Promise<HotelRes>;
 }
@@ -36,7 +36,7 @@ HotelResSchema.methods.createHotelRes = async function ( date: Date, guestNb: nu
     return reservation;
 }
 
-HotelResSchema.methods.getHotelRes = async function (link: IGuest): Promise<HotelRes[]> {
+HotelResSchema.methods.getHotelRes = async function (link: Guest): Promise<HotelRes[]> {
     await connect(uri), options;
 
     const reservation: HotelRes[] = await HotelResModel.find({
