@@ -43,7 +43,7 @@ packageSchema.methods.createPackageRes = async function ( breakfast: boolean, ho
 }
 
 //UPDATE
-packageSchema.methods.updateHotelRes = async function ( reser: Package): Promise<Package> {
+packageSchema.methods.updatePackageRes = async function ( reser: Package): Promise<Package> {
 
     const reservation: Package = await PackageResModel.findOneAndUpdate(reser, reser);
     return reservation;
