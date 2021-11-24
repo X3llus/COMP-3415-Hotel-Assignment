@@ -24,7 +24,6 @@ export async function post({ body }) {
         number,
         address,
     }: Body = body;
-    console.log(email);
     
     const userDoc: User = {
         email, password

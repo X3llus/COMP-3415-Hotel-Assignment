@@ -8,7 +8,7 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import '../tailwind.css';
 	const inputList = {
         BUTTON: 'button',
@@ -21,6 +21,7 @@
 	$: console.log(user);
 
 	import { clickOutside } from '../lib/clickOutside.js';
+import { onMount } from 'svelte';
 	function handleClickOutside(event) {
 			if (lastInput == inputList.BUTTON && showList) {
 				showList = false;
@@ -29,15 +30,15 @@
 			}
 		}
 
-	let email
-	if (user != null) {
-		fetch('/api/user/token')
-		.then((response) => response.json())
-		.then((body) => {
-			email = body.email;
-		})
-	}
+	let email: string;
 
+	onMount(async () => {
+		if (user != null) {
+			const response = await fetch('/api/user/token');
+			const body = await response.json();
+			email = body.email;
+		}
+	});
 </script>
 
 <nav class="bg-gray-100 shadow-lg border-b-2 border-red-400">
