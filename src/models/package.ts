@@ -3,20 +3,52 @@ import type { IGuest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
 const uri = process.env['VITE_MONGO_URI'];
+const options = {
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 60000,
+};
+connect(uri, options);
 
 export declare interface Package{
-    breakfast: string,
-    holiday: string,
-    discount: string,
+    breakfast: boolean,
+    holiday: boolean,
+    discount: boolean,
     description: string,
+
+    //login?(breakfast: boolean, holiday: boolean, discount: boolean, description: string): Promise<Package>;
 }
 
 var packageSchema = new Schema({
-    breakfast: { type: String, required: true },
-    holiday: { type: String, required: true },
-    discount: { type: String, required: true },
+    breakfast: { type: Boolean, required: true },
+    holiday: { type: Boolean, required: true },
+    discount: { type: Boolean, required: true },
     description: { type: String, required: true },
 });
+
+//CREATE
+packageSchema.methods.createPackageRes = async function ( breakfast: boolean, holiday: boolean, discount: boolean,  description: string): Promise<Package> {
+    
+
+    const newDoc: Package = {
+        breakfast,
+        holiday,
+        discount,
+        description,
+    };
+
+    const newPackage = new PackageResModel(newDoc);
+    const savedPackage: Package = await newPackage.save();
+    return savedPackage;
+}
+
+//UPDATE
+
+//GET
+
+//DELETE
+
+export const PackageResModel = model<Package>('Package', packageSchema);
 // export default class Package {
 //     constructor(public breakfast: string, public holiday: string, public discount: string, 
 //                 public desc: string, public id?: connect) {}
