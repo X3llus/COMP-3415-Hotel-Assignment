@@ -1,4 +1,4 @@
-import type { ObjectId } from 'bson';
+import type { ObjectId } from 'mongodb';
 import { Schema, model, connect } from 'mongoose';
 
 export interface Address {

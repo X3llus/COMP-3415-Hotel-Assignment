@@ -1,4 +1,7 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
+import { auth } from '$lib/authStore';
+
     import CustomInput from '$lib/customInput.svelte';
     import MainButton from '$lib/mainButton.svelte';
 
@@ -6,13 +9,28 @@
     let password = '';
 
     async function signin() {
-        // send credentials to /api/user/login
-        // 200 on success, go to /
-        // on fail, give error message to user
-    }
+        const response = await fetch('/api/user/login', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    email,
+                    password,
+                }
+            )
+        });
 
-    async function register() {
-        // go to register page?
+        const rData = await response.json();
+        console.log(rData);
+
+        if (response.status == 200) {
+            auth.setTo(true);
+            return goto('/');
+        }
     }
 </script>
 
@@ -27,9 +45,9 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                 Password
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="**************">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={password} id="password" type="password" placeholder="**************">
             </div>
-            <MainButton callback={() => console.log('test')} text='Sign In' width='w-full' />
+            <MainButton callback={() => signin()} text='Sign In' width='w-full' />
         </form>
     </div>
 </div>

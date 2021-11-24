@@ -1,6 +1,6 @@
 import { Schema, model, connect, ObjectId } from 'mongoose';
 import { Address, Guest, GuestModel } from './Guest';
-import bcrypt from 'bcrypt';
+import bcrypt, { genSalt } from 'bcrypt';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
 dotenv.config();
@@ -37,7 +37,8 @@ const UserSchema = new Schema({
 UserSchema.index({ email: 1 });
 
 UserSchema.methods.register = async function (email: string, password: string, fName: string, lName: string, title: string, phoneNum: string, address: Address): Promise<User> {
-    const hashedPass = await bcrypt.hash(password, saltRounds);
+    const salt = await genSalt(saltRounds);
+    const hashedPass = await bcrypt.hash(password, salt);
 
     const token = uuidv4();
 
@@ -64,12 +65,22 @@ UserSchema.methods.register = async function (email: string, password: string, f
     return savedUser;
 }
 
-UserSchema.methods.login = async function (email: string, password: string): Promise<boolean>  {
+UserSchema.methods.login = async function (email: string, password: string): Promise<User>  {
     const checkUser: User = await UserModel.findOne({
         email
     });
+    console.log(await bcrypt.compare(password, checkUser.password));
     const checkPass: boolean = await bcrypt.compare(password, checkUser.password);
-    return checkPass;
+    console.log(checkPass);
+
+    if (checkPass) {
+        checkUser.token = uuidv4();
+        checkUser.save();
+        console.log(checkUser);
+        
+        return checkUser;
+    }
+    return null;
 }
 
 UserSchema.methods.checkToken = async function (token: string): Promise<User> {

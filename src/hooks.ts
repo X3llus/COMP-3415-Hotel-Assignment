@@ -12,6 +12,11 @@ export async function handle({ request, resolve }) {
 }
 
 export async function getSession(request) {
+    if (request.locals.userToken == null) {
+        return {
+            userToken: null
+        }
+    }
     return {
         userToken: request.locals.userToken
     }

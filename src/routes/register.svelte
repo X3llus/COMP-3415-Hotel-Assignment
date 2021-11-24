@@ -1,5 +1,6 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
+import { auth } from '$lib/authStore';
 
     import CustomInput from '$lib/customInput.svelte';
     import MainButton from '$lib/mainButton.svelte';
@@ -43,9 +44,10 @@ import { goto } from '$app/navigation';
         });
 
         const rData = await response.json();
-        console.log(rData);
+        
 
         if (response.status == 200) {
+            auth.setTo(true);
             return goto('/');
         }
 

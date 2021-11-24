@@ -10,6 +10,14 @@
 
 <script lang="ts">
 	import '../tailwind.css';
+	import { auth } from '$lib/authStore';
+	import { clickOutside } from '../lib/clickOutside.js';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	export let user;
+	$: console.log(user);
+
 	const inputList = {
         BUTTON: 'button',
         OUTSIDE: 'outside',
@@ -17,11 +25,7 @@
     };
 	let showList = false;
 	let lastInput = inputList.FRESH;
-	export let user;
-	$: console.log(user);
 
-	import { clickOutside } from '../lib/clickOutside.js';
-import { onMount } from 'svelte';
 	function handleClickOutside(event) {
 			if (lastInput == inputList.BUTTON && showList) {
 				showList = false;
@@ -31,13 +35,39 @@ import { onMount } from 'svelte';
 		}
 
 	let email: string;
-
-	onMount(async () => {
-		if (user != null) {
+	
+	async function getEmail(_: any) {
+		if (user) {
+			console.log('running');
 			const response = await fetch('/api/user/token');
 			const body = await response.json();
+			console.log(body);
 			email = body.email;
+			console.log(email);
 		}
+	}
+
+	// $: getEmail(auth);
+
+	async function signOut() {
+		const response = await fetch('/api/user/signout', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'include'
+        });
+		user = null;
+		email = '';
+		goto('/');
+	}
+
+	onMount(async () => {
+		getEmail('');
+		// if (user) {
+		// 	console.log('running');
+		// 	const response = await fetch('/api/user/token');
+		// 	const body = await response.json();
+		// 	email = body.email;
+		// }
 	});
 </script>
 
@@ -50,7 +80,7 @@ import { onMount } from 'svelte';
 				</a>
 			</div>
 
-			{#if user != null}
+			{#if user}
 				<div class="flex items-center space-x-1">
 					<button class="inline-flex py-4 px-2 font-mono text-gray-600 hover:text-gray-900 uppercase" on:click={() => {
 						if (lastInput == inputList.FRESH) {
@@ -67,9 +97,9 @@ import { onMount } from 'svelte';
 						</svg>
 					</button>
 				</div>
-			{/if}
-
-			{#if user == null}
+			<!-- {/if}
+			{#if user == null} -->
+			{:else}
 				<div class="flex items-center space-x-4">
 						
 					<a href="register" class="py-1.5 px-2 rounded-lg text-black font-semibold ring-2 ring-gray-400 hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Register</a>
@@ -91,7 +121,7 @@ import { onMount } from 'svelte';
 					<a href="dashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
 				</li>
 				<li>
-					<a href="logout" class="block text-gray-700 px-4 py-2 text-sm">Logout</a>
+					<button on:click={() => signOut()} class="block text-gray-700 px-4 py-2 text-sm">Logout</button>
 				</li>
 			</ul>
 		</div>
