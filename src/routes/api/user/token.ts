@@ -19,14 +19,16 @@ export async function get(req: ServerRequest) {
     const registered: User = await user.checkToken(token);
     
     const {
-        email
+        email,
+        guest
     } = registered;
 
     return {
         status: 200,
         body: {
             token,
-            email
+            email,
+            guest
         }
     }
 }

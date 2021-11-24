@@ -30,7 +30,7 @@ export async function post({ body }) {
         email, password
     };
     const user = new UserModel(userDoc);
-    const registered: User = await user.register(email, password);
+    const registered: User = await user.register(email, password, fName, lName, title, number, address);
     
     const headers = {
         'Set-Cookie': [
