@@ -26,7 +26,7 @@ export interface IResturantRes {
 const ResturantResSchema: Schema = new Schema({
     guest: { type: 'ObjectId', ref: 'Guest', required: true },
     date: { type: Date, required: true },
-    guestNb: {tyoe: Number, required: true} 
+    guestNb: {type: Number, required: true} 
 });
 
 ResturantResSchema.methods.createResturantRes = async function (guest: Guest, date: Date, guestNb: number): Promise<IResturantRes> {
