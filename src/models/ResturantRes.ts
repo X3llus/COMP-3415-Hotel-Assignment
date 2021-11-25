@@ -38,6 +38,9 @@ ResturantResSchema.methods.createResturantRes = async function (guest: Guest, da
         guestNb
     }
 
+    console.log(date);
+    console.log(newRDoc);
+
     const res = new ResturantResModel(newRDoc);
     const savedRes: IResturantRes =  await res.save();
     return savedRes;
