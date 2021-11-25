@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 
-export let _id;
-export let dateTime;
-let dateString = dateTime.toLocaleString();
-export let guestNb;
+    export let _id;
+    export let dateTime;
+    export let guestNb;
 
+    $: dateString = dateTime.toLocaleString();
 
 </script>
 

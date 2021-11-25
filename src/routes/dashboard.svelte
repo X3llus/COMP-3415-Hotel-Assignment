@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    import Card from './cards/restCard.svelte';
+    import RestCard from '$lib/restCard.svelte';
 
     onMount(async () => {
 		const response = await fetch('/api/resturantRes');
         const body = await response.json();
-        restRes = body.reservations
+        console.log('test');
+        restRes = body.reservations || [];
+        console.log(restRes);
 	});
 	let restRes = [];
 
@@ -42,11 +44,11 @@
             <div class="border-2 border-red-400 my-2"></div>
             <div class="grid grid-cols-5 grid-wrap p-3 gap-4">
                 <!-- CARDS -->
-                {#if restRes.length > 0}
                     {#each restRes as res}
-                        <Card {res} />
+                        <RestCard {...res} />
+                    {:else}
+                        <h1>No Reservations</h1>
                     {/each}
-                {/if}
                 <!-- CARDS END-->
         </div>
     </div>  
