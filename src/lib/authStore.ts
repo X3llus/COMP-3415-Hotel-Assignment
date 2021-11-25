@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 export interface authStore {
     token: string;
     email: string;
+    manager: boolean;
     guest: {
         fName: string;
         lName: string;
