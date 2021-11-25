@@ -97,4 +97,6 @@ UserSchema.methods.checkToken = async function (token: string): Promise<boolean>
     return (user != null);
 }
 
+// UserSchema.methods.checkManager = async function ()
+
 export const UserModel = model<User>('User', UserSchema);
