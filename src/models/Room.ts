@@ -1,8 +1,8 @@
 import { Schema, model, connect } from 'mongoose';
-import type { IGuest } from './Guest';
+import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
-const uri = process.env['VITE_MONGO_URI'];
+const uri = process.env['MONGO_URI'];
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -39,7 +39,7 @@ roomSchema.methods.createRoom = async function ( suite: string, lakeview: boolea
     return room;
 }
  
-roomSchema.methods.getRoom = async function (link: IGuest): Promise<Room[]> {
+roomSchema.methods.getRoom = async function (link: Guest): Promise<Room[]> {
     await connect(uri), options;
 
     const room: Room[] = await RoomModel.find({

@@ -46,7 +46,7 @@ export async function post({ body }) {
         ]
     }
 
-    const tokenUser: User = await user.checkToken(registered.token);
+    const tokenUser: User = await user.getUsingToken(registered.token);
     const {
         guest,
         manager

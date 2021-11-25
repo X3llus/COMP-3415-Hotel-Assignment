@@ -27,7 +27,7 @@ export async function post(req) {
         ]
     }
 
-    const registered: User = await user.checkToken(loggedin.token);
+    const registered: User = await user.getUsingToken(loggedin.token);
     const {
         guest,
         manager

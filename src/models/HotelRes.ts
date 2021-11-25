@@ -2,14 +2,14 @@ import { model, Schema, connect } from 'mongoose';
 import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
-const uri = process.env['VITE_MONGO_URI'];
+const uri = process.env['MONGO_URI'];
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
 
 export interface HotelRes {
-    //id: IGuest
+    //id: Guest
     date: Date;
     guestNb: number;
     createHotelRes?(date: Date, guestNb: number): Promise<HotelRes>;

@@ -12,7 +12,7 @@ export async function get(req: ServerRequest) {
     };
     
     const user = new UserModel(userDoc);
-    const registered: User = await user.checkToken(token);
+    const registered: User = await user.getUsingToken(token);
     
     const {
         email,

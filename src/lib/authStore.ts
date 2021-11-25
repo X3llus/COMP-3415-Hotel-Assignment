@@ -14,7 +14,7 @@ export interface authStore {
 }
 
 function createAuth() {
-    const {subscribe, set, update} = writable<authStore>();
+    const { subscribe, set } = writable<authStore>();
 
     return {
         subscribe,
@@ -22,7 +22,5 @@ function createAuth() {
         signOut: () => set(null),
     };
 }
-
-
 
 export const auth = createAuth();

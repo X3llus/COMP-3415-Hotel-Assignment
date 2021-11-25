@@ -24,7 +24,7 @@ export interface User {
 
     register?(email: string, password: string, fName: string, lName: string, title: string, phoneNum: string, address: Address): Promise<User>;
     login?(email: string, password: string): Promise<User>;
-    checkToken?(token: string): Promise<User>;
+    getUsingToken?(token: string): Promise<User>;
 }
 
 const UserSchema = new Schema({
@@ -83,11 +83,18 @@ UserSchema.methods.login = async function (email: string, password: string): Pro
     return null;
 }
 
-UserSchema.methods.checkToken = async function (token: string): Promise<User> {
+UserSchema.methods.getUsingToken = async function (token: string): Promise<User> {
     const user: User = await UserModel.findOne({
         token
     }).populate('guest');
     return user;
+}
+
+UserSchema.methods.checkToken = async function (token: string): Promise<boolean> {
+    const user: User = await UserModel.findOne({
+        token
+    });
+    return (user != null);
 }
 
 export const UserModel = model<User>('User', UserSchema);

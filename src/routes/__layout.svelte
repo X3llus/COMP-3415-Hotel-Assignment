@@ -69,11 +69,8 @@
 			{#if user == null} -->
 			{:else}
 				<div class="flex items-center space-x-4">
-						
-					<a href="register" class="py-1.5 px-2 rounded-lg text-black font-semibold ring-2 ring-gray-400 hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Register</a>
-
-					<a href="login" class="py-1.5 px-2 rounded-lg text-black font-semibold ring-2 ring-gray-400 hover:ring-2 hover:ring-blue-500 hover:bg-gray-200 transition duration-200">Login</a>
-
+					<a href="login" class="py-1.5 px-2 text-black hover:text-gray-600 hover:drop-shadow-lg hover:filter transition duration-200 font-semibold">Sign In</a>
+					<a href="register" class="py-1.5 px-2 text-black hover:text-gray-600 hover:drop-shadow-lg hover:filter transition duration-200 font-semibold">Register</a>
 				</div>
 			{/if}
 				
