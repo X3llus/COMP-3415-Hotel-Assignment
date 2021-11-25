@@ -48,7 +48,8 @@ export async function post({ body }) {
 
     const tokenUser: User = await user.checkToken(registered.token);
     const {
-        guest
+        guest,
+        manager
     } = tokenUser;
 
     return {
@@ -57,6 +58,7 @@ export async function post({ body }) {
         body: {
             token: registered.token,
             email,
+            manager,
             guest
         }
     }

@@ -1,6 +1,5 @@
 import { UserModel, User } from '../../../models/User';
 import * as cookie from 'cookie';
-import type { Address } from '$models/Guest';
 import type { ServerRequest } from '@sveltejs/kit/types/hooks';
 
 export async function get(req: ServerRequest) {
@@ -17,7 +16,8 @@ export async function get(req: ServerRequest) {
     
     const {
         email,
-        guest
+        guest,
+        manager
     } = registered;
 
     return {
@@ -25,6 +25,7 @@ export async function get(req: ServerRequest) {
         body: {
             token,
             email,
+            manager,
             guest
         }
     }

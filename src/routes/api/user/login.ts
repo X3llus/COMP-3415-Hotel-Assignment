@@ -29,7 +29,8 @@ export async function post(req) {
 
     const registered: User = await user.checkToken(loggedin.token);
     const {
-        guest
+        guest,
+        manager
     } = registered;
 
     return {
@@ -38,6 +39,7 @@ export async function post(req) {
         body: {
             token: loggedin.token,
             email,
+            manager,
             guest
         }
     }
