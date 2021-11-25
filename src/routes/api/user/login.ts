@@ -26,11 +26,19 @@ export async function post(req) {
             ),
         ]
     }
+
+    const registered: User = await user.checkToken(loggedin.token);
+    const {
+        guest
+    } = registered;
+
     return {
         status: 200,
         headers,
         body: {
-            loggedin
+            token: loggedin.token,
+            email,
+            guest
         }
-    };
+    }
 }

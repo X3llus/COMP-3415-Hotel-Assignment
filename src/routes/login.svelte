@@ -25,11 +25,10 @@ import { auth } from '$lib/authStore';
         });
 
         const rData = await response.json();
-        console.log(rData);
 
         if (response.status == 200) {
-            auth.setTo(true);
-            return goto('/');
+            auth.setTo(rData);
+            goto('/');
         }
     }
 </script>

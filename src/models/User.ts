@@ -75,10 +75,10 @@ UserSchema.methods.login = async function (email: string, password: string): Pro
 
     if (checkPass) {
         checkUser.token = uuidv4();
-        checkUser.save();
-        console.log(checkUser);
+        const finalUser = await checkUser.save();
+        console.log(finalUser);
         
-        return checkUser;
+        return finalUser;
     }
     return null;
 }

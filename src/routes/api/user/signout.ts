@@ -1,19 +1,6 @@
-import * as cookie from 'cookie';
-
 export async function post(req) {
     const headers = {
-        'Set-Cookie': [
-            cookie.serialize(
-                'userToken',
-                null,
-                {
-                    httpOnly: true,
-                    maxAge: 1,
-                    sameSite: 'strict',
-                    path: '/'
-                }
-            ),
-        ]
+        'Set-Cookie': 'userToken=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
     }
     return {
         status: 200,

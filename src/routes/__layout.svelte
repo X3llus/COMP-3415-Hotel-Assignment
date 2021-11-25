@@ -1,8 +1,9 @@
 <script context="module">
 	export async function load({ session }) {
+		console.log('loading');
 		return {
 			props: {
-				user: session.userToken
+				token: session.userToken
 			}
 		};
 	}
@@ -15,8 +16,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
-	export let user;
-	$: console.log(user);
+	export let token;
 
 	const inputList = {
         BUTTON: 'button',
@@ -26,7 +26,7 @@
 	let showList = false;
 	let lastInput = inputList.FRESH;
 
-	function handleClickOutside(event) {
+	function handleClickOutside(_: any) {
 			if (lastInput == inputList.BUTTON && showList) {
 				showList = false;
 				lastInput = inputList.OUTSIDE;
@@ -34,40 +34,22 @@
 			}
 		}
 
-	let email: string;
-	
-	async function getEmail(_: any) {
-		if (user) {
-			console.log('running');
-			const response = await fetch('/api/user/token');
-			const body = await response.json();
-			console.log(body);
-			email = body.email;
-			console.log(email);
-		}
-	}
-
-	// $: getEmail(auth);
-
 	async function signOut() {
-		const response = await fetch('/api/user/signout', {
+		await fetch('/api/user/signout', {
             method: 'POST',
             mode: 'same-origin',
             credentials: 'include'
         });
-		user = null;
-		email = '';
-		goto('/');
+		auth.signOut();
+		showList = false;
+		lastInput = inputList.OUTSIDE;
+		setTimeout(() => (lastInput = inputList.FRESH), 10);
 	}
 
 	onMount(async () => {
-		getEmail('');
-		// if (user) {
-		// 	console.log('running');
-		// 	const response = await fetch('/api/user/token');
-		// 	const body = await response.json();
-		// 	email = body.email;
-		// }
+		const response = await fetch('/api/user/token');
+		const body = await response.json();
+		auth.setTo(body);
 	});
 </script>
 
@@ -80,7 +62,7 @@
 				</a>
 			</div>
 
-			{#if user}
+			{#if $auth}
 				<div class="flex items-center space-x-1">
 					<button class="inline-flex py-4 px-2 font-mono text-gray-600 hover:text-gray-900 uppercase" on:click={() => {
 						if (lastInput == inputList.FRESH) {
@@ -91,7 +73,7 @@
 							showList = true;
 						}
 						lastInput = inputList.BUTTON;
-					}}>{email}
+					}}>{$auth.email}
 						<svg class="-mr-1 ml-1 h-7 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 							<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
 						</svg>
