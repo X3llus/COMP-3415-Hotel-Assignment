@@ -10,9 +10,10 @@ const options = {
 
 export interface HotelRes {
     guest: ObjectId | Guest;
-    date: Date;
+    startDate: Date;
+    endDate: Date;
     guestNb: number;
-    createHotelRes?(guest: Guest, date: Date, guestNb: number): Promise<HotelRes>;
+    createHotelRes?(guest: Guest, startDate: Date, endDate: Date, guestNb: number): Promise<HotelRes>;
     getHotelRes?(link: Guest): Promise<HotelRes[]>;
     updateHotelRes?(res: HotelRes): Promise<HotelRes>;
     deleteHotelRes?(res: HotelRes): Promise<HotelRes>;
@@ -20,16 +21,18 @@ export interface HotelRes {
 
 const HotelResSchema: Schema = new Schema({
     guest: { type: 'ObjectId', ref: 'Guest', required: true},
-    date: { type: Date, required: true },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
     guestNb: {type: Number, required: true} 
 });
 
-HotelResSchema.methods.createHotelRes = async function ( guest: Guest, date: Date, guestNb: number): Promise<HotelRes> {
+HotelResSchema.methods.createHotelRes = async function ( guest: Guest, startDate: Date, endDate: Date, guestNb: number): Promise<HotelRes> {
     await connect(uri), options ;
 
     const res = new HotelResModel({
-        date: date,
-        guestNb: guestNb
+        startDate,
+        endDate,
+        guestNb
     });
 
     // Creates and saves the id for the hotel reservation

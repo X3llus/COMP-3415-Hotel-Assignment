@@ -3,21 +3,23 @@ import { HotelResModel, HotelRes } from '../../models/HotelRes';
 
 interface Body {
     guest: Guest;
-    date: Date;
+    startDate: Date;
+    endDate: Date;
     guestNb: number;
 };
 
 export async function post({body}) {
     const {
         guest,
-        date,
+        startDate,
+        endDate,
         guestNb
     }: Body = body;
     const resDoc: HotelRes = {
-        guest, date, guestNb
+        guest, startDate, endDate, guestNb
     };
     const reservation = new HotelResModel(resDoc);
-    const reserved: HotelRes = await reservation.createHotelRes(guest, date, guestNb);
+    const reserved: HotelRes = await reservation.createHotelRes(guest, startDate, endDate, guestNb);
     return {
         status: 200,
         body: {
@@ -39,11 +41,12 @@ export async function get(req: Guest) {
 export async function put(body) {
     const {
         guest,
-        date,
+        startDate,
+        endDate,
         guestNb
     }: Body = body;
     const resDoc: HotelRes = {
-        guest, date, guestNb
+        guest, startDate, endDate, guestNb
     };
 
     const reservation = new HotelResModel(resDoc);
