@@ -1,4 +1,4 @@
-import { model, Schema, connect } from 'mongoose';
+import { model, Schema, connect, ObjectId } from 'mongoose';
 import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
@@ -9,7 +9,7 @@ const options = {
 };
 
 export interface HotelRes {
-    //id: Guest
+    guest: ObjectId | Guest;
     date: Date;
     guestNb: number;
     createHotelRes?(date: Date, guestNb: number): Promise<HotelRes>;
@@ -19,6 +19,7 @@ export interface HotelRes {
 }
 
 const HotelResSchema: Schema = new Schema({
+    guest: { type: 'ObjectId', ref: 'Guest', required: true},
     date: { type: Date, required: true },
     guestNb: {type: Number, required: true} 
 });
