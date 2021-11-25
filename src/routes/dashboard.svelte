@@ -45,7 +45,7 @@
             <div class="flex justify-between">
                 <h2 class="text-3xl font-bold">Restaurant Reservations</h2>
                 <button class=" px-3 item text-white rounded-lg shadow bg-green-600 hover:bg-green-700 font-bold transition duration-200">
-                    <a href="#" class="">+ Reservation</a>
+                    <a href="resturantRes" class="">+ Reservation</a>
                 </button>
             </div>
             <div class="border-2 border-red-400 my-2"></div>

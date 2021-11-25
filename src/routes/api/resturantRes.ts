@@ -3,17 +3,16 @@ import { ResturantResModel, IResturantRes } from '../../models/ResturantRes';
 
 interface Body {
     guest: Guest;
-    dateString: string;
+    date: Date;
     guestNb: number;
 };
 
 export async function post({body}) {
     const {
         guest,
-        dateString,
+        date,
         guestNb
     }: Body = body;
-    const date: Date = new Date(Date.parse(dateString));
     const resDoc: IResturantRes = {
         guest, date, guestNb
     };
@@ -41,10 +40,9 @@ export async function get(req: Guest) {
 export async function put(body) {
     const {
         guest,
-        dateString,
+        date,
         guestNb
     }: Body = body;
-    const date: Date = new Date(Date.parse(dateString));
     const resDoc: IResturantRes = {
         guest, date, guestNb
     };
@@ -57,3 +55,7 @@ export async function put(body) {
         }
     };
 }
+
+// export async function del() {
+
+// }
