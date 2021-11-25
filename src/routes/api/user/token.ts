@@ -2,7 +2,7 @@ import { UserModel, User } from '../../../models/User';
 import * as cookie from 'cookie';
 import type { ServerRequest } from '@sveltejs/kit/types/hooks';
 
-export async function getToken(req: ServerRequest): Promise<User> {
+export async function getToken(req: ServerRequest): Promise<any> {
     const cookies = cookie.parse(req.headers.cookie || "");
     
     const token = cookies.userToken;
@@ -13,12 +13,15 @@ export async function getToken(req: ServerRequest): Promise<User> {
     
     const user = new UserModel(userDoc);
     const registered: User = await user.getUsingToken(token);
-    return registered;
+    return { registered, token };
 }
 
 export async function get(req: ServerRequest) {
     
-    const registered = await getToken(req);
+    const {
+        registered,
+        token
+    } = await getToken(req);
     
     const {
         email,
