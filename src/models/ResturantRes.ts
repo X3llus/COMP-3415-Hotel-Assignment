@@ -1,4 +1,4 @@
-import { model, Schema, connect } from 'mongoose';
+import { model, Schema, connect, ObjectId } from 'mongoose';
 import type { Guest } from './Guest';
 import dotenv from 'dotenv';
 dotenv.config()
@@ -14,41 +14,40 @@ const options = {
  */
 
 export interface IResturantRes {
-    //id: IGuest
+    guest: ObjectId | Guest;
     date: Date;
     guestNb: number;
-    createResturantRes?(date: Date, guestNb: number): Promise<IResturantRes>;
-    getResturantRes?(link: Guest): Promise<IResturantRes[]>;
+    createResturantRes?(guest: Guest, date: Date, guestNb: number): Promise<IResturantRes>;
+    getResturantRes?(guest: Guest): Promise<IResturantRes[]>;
     updateResturantRes?(res: IResturantRes): Promise<IResturantRes>;
     deleteResturantRes?(res: IResturantRes): Promise<IResturantRes>;
 }
 
 const ResturantResSchema: Schema = new Schema({
-    //id: { type: 'ObjectId', ref: 'Guest', required: true },
+    guest: { type: 'ObjectId', ref: 'Guest', required: true },
     date: { type: Date, required: true },
     guestNb: {tyoe: Number, required: true} 
 });
 
-ResturantResSchema.methods.createResturantRes = async function (/*id: IGuest, */date: Date, guestNb: number): Promise<IResturantRes> {
+ResturantResSchema.methods.createResturantRes = async function (guest: Guest, date: Date, guestNb: number): Promise<IResturantRes> {
     await connect(uri),options ;
     
-    const res = new ResturantResModel({
-        //id: IGuest
-        date: date,
-        guestNb: guestNb
-    });
-    
-    // Create and save id for reservation here
+    const newRDoc: IResturantRes ={
+        guest,
+        date,
+        guestNb
+    }
 
-    const reservation: IResturantRes =  await res.save();
-    return reservation;
+    const res = new ResturantResModel(newRDoc);
+    const savedRes: IResturantRes =  await res.save();
+    return savedRes;
 }
 
-ResturantResSchema.methods.getResturantRes = async function (link: Guest): Promise<IResturantRes[]> {
+ResturantResSchema.methods.getResturantRes = async function (guest: Guest): Promise<IResturantRes[]> {
     await connect(uri), options;
 
     const reservations: IResturantRes[] = await ResturantResModel.find({
-        link: link
+        guest: guest
     });
 
     return reservations
