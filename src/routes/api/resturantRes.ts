@@ -2,6 +2,7 @@ import type { Guest } from '$models/Guest';
 import { ResturantResModel, IResturantRes } from '../../models/ResturantRes';
 import { token } from './user/token';
 
+
 interface Body {
     guest: Guest;
     date: Date;
