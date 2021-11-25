@@ -25,6 +25,9 @@ export interface User {
     register?(email: string, password: string, fName: string, lName: string, title: string, phoneNum: string, address: Address): Promise<User>;
     login?(email: string, password: string): Promise<User>;
     getUsingToken?(token: string): Promise<User>;
+    checkToken?(token: string): Promise<boolean>;
+    registerManager?(email: string, password: string): Promise<boolean>;
+    checkManager?(token: string): Promise<boolean>
 }
 
 const UserSchema = new Schema({
@@ -97,6 +100,26 @@ UserSchema.methods.checkToken = async function (token: string): Promise<boolean>
     return (user != null);
 }
 
-// UserSchema.methods.checkManager = async function ()
+UserSchema.methods.registerManager = async function (email: string, password: string): Promise<boolean> {
+    const salt = await genSalt(saltRounds);
+    const hashedPass = await bcrypt.hash(password, salt);
+
+    const newDoc: User = {
+        email,
+        password: hashedPass
+    };
+
+    const newUser = new UserModel(newDoc);
+    const savedUser: User = await newUser.save();
+    return (savedUser != null);
+}
+
+UserSchema.methods.checkManager = async function (token: string): Promise<boolean> {
+    const user: User = await UserModel.findOne({
+        token,
+        manager: true
+    });
+    return (user != null);
+}
 
 export const UserModel = model<User>('User', UserSchema);
