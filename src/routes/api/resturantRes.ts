@@ -28,10 +28,11 @@ export async function post(req) {
     };
 }
 
-export async function get(req: Guest) {
+export async function get(req) {
 
+    let guest = (await getToken(req)).registered.guest;
     const reservation = new ResturantResModel();
-    const res: IResturantRes[] = await reservation.getResturantRes(req);
+    const res: IResturantRes[] = await reservation.getResturantRes(guest);
     return {
         body: {
             res
@@ -39,12 +40,12 @@ export async function get(req: Guest) {
     }
 }
 
-export async function put(body) {
+export async function put(req) {
     const {
-        guest,
         date,
         guestNb
-    }: Body = body;
+    }: Body = req.body;
+    let guest = (await getToken(req)).registered.guest;
     const resDoc: IResturantRes = {
         guest, date, guestNb
     };
