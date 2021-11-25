@@ -12,7 +12,7 @@ export interface HotelRes {
     guest: ObjectId | Guest;
     date: Date;
     guestNb: number;
-    createHotelRes?(date: Date, guestNb: number): Promise<HotelRes>;
+    createHotelRes?(guest: Guest, date: Date, guestNb: number): Promise<HotelRes>;
     getHotelRes?(link: Guest): Promise<HotelRes[]>;
     updateHotelRes?(res: HotelRes): Promise<HotelRes>;
     deleteHotelRes?(res: HotelRes): Promise<HotelRes>;
@@ -24,7 +24,7 @@ const HotelResSchema: Schema = new Schema({
     guestNb: {type: Number, required: true} 
 });
 
-HotelResSchema.methods.createHotelRes = async function ( date: Date, guestNb: number): Promise<HotelRes> {
+HotelResSchema.methods.createHotelRes = async function ( guest: Guest, date: Date, guestNb: number): Promise<HotelRes> {
     await connect(uri), options ;
 
     const res = new HotelResModel({
@@ -37,11 +37,11 @@ HotelResSchema.methods.createHotelRes = async function ( date: Date, guestNb: nu
     return reservation;
 }
 
-HotelResSchema.methods.getHotelRes = async function (link: Guest): Promise<HotelRes[]> {
+HotelResSchema.methods.getHotelRes = async function (guest: Guest): Promise<HotelRes[]> {
     await connect(uri), options;
 
     const reservation: HotelRes[] = await HotelResModel.find({
-        link:link
+        guest: guest
     });
     return reservation;
 }
