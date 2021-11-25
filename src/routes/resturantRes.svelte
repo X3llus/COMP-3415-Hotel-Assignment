@@ -30,7 +30,7 @@
             },
             body: JSON.stringify(
                 {
-                    dateTime,
+                    date: dateTime,
                     guestNb
                 }
             )

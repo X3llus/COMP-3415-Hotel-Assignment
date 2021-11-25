@@ -1,20 +1,20 @@
 import type { Guest } from '$models/Guest';
 import { ResturantResModel, IResturantRes } from '../../models/ResturantRes';
-import { token } from './user/token';
+import { getToken } from './user/token';
+
 
 
 interface Body {
-    guest: Guest;
     date: Date;
     guestNb: number;
 };
 
-export async function post({body}) {
+export async function post(req) {
     const {
-        guest,
         date,
         guestNb
-    }: Body = body;
+    }: Body = req.body;
+    let guest = (await getToken(req)).registered.guest;
     const resDoc: IResturantRes = {
         guest, date, guestNb
     };
