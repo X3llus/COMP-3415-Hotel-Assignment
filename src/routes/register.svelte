@@ -44,10 +44,9 @@ import { auth } from '$lib/authStore';
         });
 
         const rData = await response.json();
-        
 
         if (response.status == 200) {
-            auth.setTo(true);
+            auth.setTo(rData);
             return goto('/');
         }
 

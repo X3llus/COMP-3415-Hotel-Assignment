@@ -45,11 +45,41 @@ export async function post({ body }) {
             ),
         ]
     }
+
+    const tokenUser: User = await user.checkToken(registered.token);
+    const {
+        guest
+    } = tokenUser;
+
     return {
         status: 200,
         headers,
         body: {
-            registered
+            token: registered.token,
+            email,
+            guest
         }
-    };
+    }
+
+    // const headers = {
+    //     'Set-Cookie': [
+    //         cookie.serialize(
+    //             'userToken',
+    //             registered.token,
+    //             {
+    //                 httpOnly: true,
+    //                 maxAge: 60 * 60 * 24 * 7,
+    //                 sameSite: 'strict',
+    //                 path: '/'
+    //             }
+    //         ),
+    //     ]
+    // }
+    // return {
+    //     status: 200,
+    //     headers,
+    //     body: {
+    //         registered
+    //     }
+    // };
 }

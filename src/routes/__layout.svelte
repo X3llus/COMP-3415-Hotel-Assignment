@@ -1,22 +1,8 @@
-<script context="module">
-	export async function load({ session }) {
-		console.log('loading');
-		return {
-			props: {
-				token: session.userToken
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import '../tailwind.css';
 	import { auth } from '$lib/authStore';
 	import { clickOutside } from '../lib/clickOutside.js';
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-
-	export let token;
 
 	const inputList = {
         BUTTON: 'button',
