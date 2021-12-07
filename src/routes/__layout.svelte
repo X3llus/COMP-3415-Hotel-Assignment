@@ -65,8 +65,6 @@
 						</svg>
 					</button>
 				</div>
-			<!-- {/if}
-			{#if user == null} -->
 			{:else}
 				<div class="flex items-center space-x-4">
 					<a href="login" class="py-1.5 px-2 text-black hover:text-gray-600 hover:drop-shadow-lg hover:filter transition duration-200 font-semibold">Sign In</a>

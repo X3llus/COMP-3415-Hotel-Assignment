@@ -59,6 +59,21 @@ export async function put(req) {
     };
 }
 
-// export async function del() {
-
-// }
+export async function del(req) {
+    const {
+        date,
+        guestNb
+    }: Body = req.body;
+    let guest = (await getToken(req)).registered.guest;
+    const resDoc: IResturantRes = {
+        guest, date, guestNb
+    };
+    const reservation = new ResturantResModel(resDoc);
+    const reserved: IResturantRes = await reservation.deleteResturantRes(reservation);
+    return {
+        status: 200,
+        body: {
+            reserved
+        }
+    };
+}

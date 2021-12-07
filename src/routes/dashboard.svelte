@@ -5,7 +5,6 @@
     onMount(async () => {
 		const response = await fetch('/api/resturantRes');
         const body = await response.json();
-        console.log('test');
         restRes = body.res || [];
         console.log(restRes);
 	});
