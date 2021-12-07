@@ -9,6 +9,12 @@
     let dateTime;
     let guestNb = 0;
 
+    let meals = ['breakfast', 'lunch', 'dinner'];
+    let meal= '';
+    let breakfast = ['8:00','8:30','9:00','9:30'];
+    let lunch = ['12:00','12:30','13:00'];
+    let dinner = ['6:00','6:30','7:00','7:30','8:00'];
+
     async function getDateTime(ds, ts) {
 		const newDate = new Date(ds);
 		
@@ -59,8 +65,30 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={dateString} id="date" type="date">
             </div>
             <div class="mb-6">
+                <label for="Meal" class="block text-gray-700 text-sm font-bold mb-2">Meal</label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={meal} id="meal" type="meal" name="meal">
+                    {#each meals as meal}
+                        <option value={meal}>{meal}</option>
+                    {/each}
+                </select>
+            </div>
+            <div class="mb-6">
                 <label for="Time" class="block text-gray-700 text-sm font-bold mb-2">Time</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={timeString} id="time" type="time" name="time">
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={timeString} id="time" type="time" name="time">
+                {#if meal == 'breakfast'}
+                    {#each breakfast as time}
+                        <option value={time}>{time}</option>
+                    {/each}
+                {:else if meal == 'lunch'}
+                    {#each lunch as time}
+                        <option value={time}>{time}</option>
+                    {/each}
+                {:else if meal == 'dinner'}
+                    {#each dinner as time}
+                        <option value={time}>{time}</option>
+                    {/each}
+                {/if}
+                </select>
             </div>
             <MainButton callback={() => create()} text ='Create Reservation' width='w-full'/>
         </form>
