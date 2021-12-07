@@ -1,10 +1,11 @@
 <script lang="ts">
 
     export let _id;
-    export let dateTime;
+    export let date;
     export let guestNb;
-
-    $: dateString = dateTime.toLocaleString();
+    
+    $: dateForm = new Date(date);
+    $: dateString = dateForm.toLocaleString();
 
 </script>
 

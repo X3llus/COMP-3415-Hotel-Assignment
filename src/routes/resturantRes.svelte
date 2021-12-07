@@ -17,7 +17,6 @@
 
     async function getDateTime(ds, ts) {
 		const newDate = new Date(ds);
-		
 		newDate.setHours(ts.split(':')[0]);
 		newDate.setMinutes(ts.split(':')[1]);
 		
