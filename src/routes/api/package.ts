@@ -27,10 +27,10 @@ export async function post({body}) {
     }: Body = body;
     const date: Date = new Date(Date.parse(dateString));
     const resDoc: PackageRes = {
-        guest, date, guestNb
+        guest, dateString, guestNb
     };
     const reservation = new PackageResModel(resDoc);
-    const reserved: PackageRes = await reservation.createPackageRes(guest, date, guestNb);
+    const reserved: PackageRes = await reservation.createPackageRes(guest, dateString, guestNb);
     return {
         status: 200,
         body: {
