@@ -1,6 +1,7 @@
-import { auth, authStore } from '$lib/authStore';
-import type { LoadInput, LoadOutput } from '@sveltejs/kit/types/page';
+import { auth } from '../lib/authStore';
+import type { LoadOutput } from '@sveltejs/kit/types/page';
 
+// List of pages at each auth level
 let guardedPages = [
     '/dashboard',
     '/resturantRes',
@@ -21,18 +22,19 @@ enum AuthState {
     manager
 };
 
-let user: authStore;
+let user;
 auth.subscribe(aUser => user = aUser);
 
 export async function authGuard(page): Promise<LoadOutput> {
 
+    // Don't want to redirect when home
     if (page.path == '/') return {};
 
     const loggedIn = (user != null);
-    // check if logged in
     const state = checkAuthState();
-    console.log(state);
 
+    // Redirect unauthed users back home
+    // keep em out of where they shouldn't be
     if (!checkGuard(page.path, state)) {
         return {
             status: 302,
@@ -42,6 +44,7 @@ export async function authGuard(page): Promise<LoadOutput> {
     return {}
 }
 
+// 
 function checkAuthState(): AuthState {
     if (user == null) {
         return AuthState.none;

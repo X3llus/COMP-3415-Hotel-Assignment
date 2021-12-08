@@ -2,7 +2,7 @@
 	import { authGuard } from '$lib/authGuard';
 	import type { LoadInput, LoadOutput } from '@sveltejs/kit/types/page';
 
-	export async function load({ page, session }: LoadInput): Promise<LoadOutput> {
+	export async function load({ page }: LoadInput): Promise<LoadOutput> {
 		return await authGuard(page);
 	}
 </script>
