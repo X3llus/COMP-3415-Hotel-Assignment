@@ -3,6 +3,7 @@
 	import { auth } from '$lib/authStore';
 
     import MainButton from "$lib/mainButton.svelte";
+import { isValidObjectId } from 'mongoose';
 
     let dateString = '';
     let timeString = '';
@@ -15,12 +16,15 @@
     let lunch = ['-:--','12:00','12:30','13:00'];
     let dinner = ['-:--','18:00','18:30','19:00','19:30','20:00'];
 
+    let isValidDate;
+
     async function getDateTime(ds, ts) {
 		const newDate = new Date(ds);
 		newDate.setHours(ts.split(':')[0]);
 		newDate.setMinutes(ts.split(':')[1]);
 		
 		dateTime = newDate.toString();
+        isValidDate = Date.parse(dateTime);
 	}
 
     $: getDateTime(dateString, timeString);
@@ -88,6 +92,9 @@
                     {/each}
                 {/if}
                 </select>
+                {#if (timeString != '') && isNaN(isValidDate)}
+                    <p class="font-normal text-red-500">Pick a Valid Time</p>
+                {/if}
             </div>
             <MainButton callback={() => create()} text ='Create Reservation' width='w-full'/>
         </form>
