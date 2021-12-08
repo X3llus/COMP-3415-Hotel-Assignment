@@ -49,14 +49,10 @@ packageSchema.methods.updatePackageRes = async function ( reser: Package): Promi
     return reservation;
 }
 //GET
-packageSchema.methods.getPackageRes = async function(breakfast: boolean, holiday: boolean, discount: boolean): Promise<Package> {
+packageSchema.methods.getPackageRes = async function(): Promise<Package[]> {
     
 
-    const savedPackage: Package = await PackageResModel.findOne({
-        breakfast:breakfast,
-        holiday:holiday,
-        discount:discount
-    });
+    const savedPackage: Package[] = await PackageResModel.find();
     return savedPackage;
 }
 //DELETE

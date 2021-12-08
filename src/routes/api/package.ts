@@ -1,5 +1,5 @@
 import type { Guest } from '$models/Guest';
-import { PackageResModel, PackageRes } from '../../../models/Package';
+import { PackageResModel, Package } from '$models/Package';
 
 interface Body {
     guest: Guest;
@@ -8,10 +8,10 @@ interface Body {
 };
 
 //GET
-export async function get(req: Guest) {
+export async function get() {
 
     const reservation = new PackageResModel();
-    const res: PackageRes[] = await reservation.getPackageRes(req);
+    const res: Package[] = await reservation.getPackageRes();
     return {
         body: {
             res
@@ -26,11 +26,11 @@ export async function post({body}) {
         guestNb
     }: Body = body;
     const date: Date = new Date(Date.parse(dateString));
-    const resDoc: PackageRes = {
+    const resDoc: Package = {
         guest, dateString, guestNb
     };
     const reservation = new PackageResModel(resDoc);
-    const reserved: PackageRes = await reservation.createPackageRes(guest, dateString, guestNb);
+    const reserved: Package = await reservation.createPackageRes(guest, dateString, guestNb);
     return {
         status: 200,
         body: {
@@ -45,12 +45,12 @@ export async function put(body) {
         dateString,
         guestNb
     }: Body = body;
-    const resDoc: PackageRes = {
+    const resDoc: Package = {
         guest, dateString, guestNb
     };
 
     const reservation = new PackageResModel(resDoc);
-    const reserved: PackageRes = await reservation.updatePackageRes(reservation);
+    const reserved: Package = await reservation.updatePackageRes(reservation);
     return {
         status: 200,
         body: {
