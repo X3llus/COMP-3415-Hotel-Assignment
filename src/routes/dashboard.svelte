@@ -3,6 +3,8 @@
     import RestCard from '$lib/restCard.svelte';
     import { fade } from 'svelte/transition';
 
+    let restRes = [];
+
     onMount(async () => {
 		restArray();
 	});
@@ -13,7 +15,6 @@
         restRes = body.res || [];
         console.log('reload');
     }
-	let restRes = [];
 
 </script>
 
