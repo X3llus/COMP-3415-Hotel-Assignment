@@ -29,7 +29,7 @@ import { fade } from "svelte/transition";
 	}
 </script>
 
-<div transition:fade class="card bg-white rounded-lg shadow-md p-2">
+<div transition:fade|local class="card bg-white rounded-lg shadow-md p-2">
 	<span class="text-lg font-bold">{dateString}</span>
 	<div class="border border-red-400 " />
 	<div class="px-2 py-1">
