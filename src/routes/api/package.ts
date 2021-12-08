@@ -1,5 +1,5 @@
 import type { Guest } from '$models/Guest';
-import { PackageResModel, Package } from '$models/Package';
+import { PackageResModel, Package } from '../../models/Package';
 
 interface Body {
     guest: Guest;

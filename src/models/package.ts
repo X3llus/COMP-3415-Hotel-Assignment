@@ -43,9 +43,9 @@ packageSchema.methods.createPackageRes = async function ( breakfast: boolean, ho
 }
 
 //UPDATE
-packageSchema.methods.updatePackageRes = async function ( reser: Package): Promise<Package> {
+packageSchema.methods.updatePackageRes = async function (): Promise<Package> {
 
-    const reservation: Package = await PackageResModel.findOneAndUpdate(reser, reser);
+    const reservation: Package= await PackageResModel.findOneAndUpdate();
     return reservation;
 }
 //GET
@@ -56,9 +56,9 @@ packageSchema.methods.getPackageRes = async function(): Promise<Package[]> {
     return savedPackage;
 }
 //DELETE
-packageSchema.methods.deletePackageRes = async function (reser: Package): Promise<Package> {
+packageSchema.methods.deletePackageRes = async function (): Promise<Package> {
 
-    const reservation: Package = await PackageResModel.findOneAndDelete(reser);
+    const reservation: Package = await PackageResModel.findOneAndDelete();
     return reservation;
 }
 //
