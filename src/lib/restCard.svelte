@@ -1,9 +1,13 @@
 <script lang="ts">
 
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let _id;
     export let date;
     export let guestNb;
-    
+
     $: dateForm = new Date(date);
     $: dateString = dateForm.toLocaleString();
 
@@ -21,6 +25,8 @@
             }
         )
     });
+    dispatch('update');
+    console.log('delete');
     }
 
 </script>

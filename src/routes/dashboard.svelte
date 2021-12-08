@@ -1,13 +1,18 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import RestCard from '$lib/restCard.svelte';
+    import { fade } from 'svelte/transition';
 
     onMount(async () => {
-		const response = await fetch('/api/resturantRes');
+		restArray();
+	});
+
+    async function restArray() {
+        const response = await fetch('/api/resturantRes');
         const body = await response.json();
         restRes = body.res || [];
-        console.log(restRes);
-	});
+        console.log('reload');
+    }
 	let restRes = [];
 
 </script>
@@ -44,7 +49,7 @@
             <div class="grid grid-cols-5 grid-wrap p-3 gap-4">
                 <!-- CARDS -->
                     {#each restRes as res}
-                        <RestCard {...res} />
+                        <RestCard {...res} on:update={restArray} />
                     {:else}
                         <h1>No Reservations</h1>
                     {/each}

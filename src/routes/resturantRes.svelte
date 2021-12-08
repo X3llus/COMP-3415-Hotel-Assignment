@@ -11,9 +11,9 @@
 
     let meals = ['breakfast', 'lunch', 'dinner'];
     let meal= '';
-    let breakfast = ['8:00','8:30','9:00','9:30'];
-    let lunch = ['12:00','12:30','13:00'];
-    let dinner = ['6:00','6:30','7:00','7:30','8:00'];
+    let breakfast = ['-:--','8:00','8:30','9:00','9:30'];
+    let lunch = ['-:--','12:00','12:30','13:00'];
+    let dinner = ['-:--','18:00','18:30','19:00','19:30','20:00'];
 
     async function getDateTime(ds, ts) {
 		const newDate = new Date(ds);
