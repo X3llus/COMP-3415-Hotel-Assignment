@@ -42,11 +42,11 @@
                         <td class="px-4 py-1">Holiday</td>
                         <td class="px-4 py-1">Lakefront</td>
                     </tr>
-                    <tr class="bg-gray-100">
+                    <!-- <tr class="bg-gray-100">
                         <td class="px-4 py-1">27/11/2021</td>
                         <td class="px-4 py-1">14/12/2021</td>
                         <td class="px-4 py-1">Rick Rantos</td>
-                        <td class="px-4 py-1">N/A</td>
+                        <td class="px-4 py-1">N/A</td> -->
                         <td class="px-4 py-1">Suite</td>
                     </tr>
                 </tbody>
