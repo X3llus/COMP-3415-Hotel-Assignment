@@ -19,18 +19,10 @@ export async function get() {
     }
 }
 
-export async function post({body}) {
-    const {
-        guest,
-        dateString,
-        guestNb
-    }: Body = body;
-    const date: Date = new Date(Date.parse(dateString));
-    const resDoc: Package = {
-        guest, dateString, guestNb
-    };
-    const reservation = new PackageResModel(resDoc);
-    const reserved: Package = await reservation.createPackageRes(guest, dateString, guestNb);
+export async function post() {
+    const date: Date = new Date();
+    const reservation = new PackageResModel();
+    const reserved: Package = await reservation.createPackageRes();
     return {
         status: 200,
         body: {
@@ -45,12 +37,12 @@ export async function put(body) {
         dateString,
         guestNb
     }: Body = body;
-    const resDoc: Package = {
-        guest, dateString, guestNb
-    };
+    // const resDoc: Package = {
+    //     guest, dateString, guestNb
+    // };
 
-    const reservation = new PackageResModel(resDoc);
-    const reserved: Package = await reservation.updatePackageRes(reservation);
+    const reservation = new PackageResModel();//(resDoc);
+    const reserved: Package = await reservation.updatePackageRes();//(reservation);
     return {
         status: 200,
         body: {
