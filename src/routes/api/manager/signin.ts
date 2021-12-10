@@ -10,7 +10,7 @@ export async function post(req) {
         email, password,
     };
     const user = new UserModel(userDoc);
-    const loggedin: User = await user.login(req.body.email, req.body.password);
+    const loggedin: User = await user.managerSignin(req.body.email, req.body.password);
     
     const headers = {
         'Set-Cookie': [

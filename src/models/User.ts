@@ -23,7 +23,8 @@ export interface User {
     guest?: ObjectId | Guest;
 
     register?(email: string, password: string, fName: string, lName: string, title: string, phoneNum: string, address: Address): Promise<User>;
-    login?(email: string, password: string): Promise<User>;
+    guestSignin?(email: string, password: string): Promise<User>;
+    managerSignin?(email: string, password: string): Promise<User>;
     getUsingToken?(token: string): Promise<User>;
     checkToken?(token: string): Promise<boolean>;
     registerManager?(email: string, password: string): Promise<boolean>;
@@ -68,9 +69,29 @@ UserSchema.methods.register = async function (email: string, password: string, f
     return savedUser;
 }
 
-UserSchema.methods.login = async function (email: string, password: string): Promise<User>  {
+UserSchema.methods.guestSignin = async function (email: string, password: string): Promise<User>  {
     const checkUser: User = await UserModel.findOne({
-        email
+        email,
+        manager: false
+    });
+    console.log(await bcrypt.compare(password, checkUser.password));
+    const checkPass: boolean = await bcrypt.compare(password, checkUser.password);
+    console.log(checkPass);
+
+    if (checkPass) {
+        checkUser.token = uuidv4();
+        const finalUser = await checkUser.save();
+        console.log(finalUser);
+        
+        return finalUser;
+    }
+    return null;
+}
+
+UserSchema.methods.managerSignin = async function (email: string, password: string): Promise<User>  {
+    const checkUser: User = await UserModel.findOne({
+        email,
+        manager: true
     });
     console.log(await bcrypt.compare(password, checkUser.password));
     const checkPass: boolean = await bcrypt.compare(password, checkUser.password);

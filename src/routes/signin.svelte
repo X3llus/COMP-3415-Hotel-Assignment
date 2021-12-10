@@ -9,7 +9,7 @@
 	let password = '';
 
 	async function signin() {
-		const response = await fetch('/api/user/login', {
+		const response = await fetch('/api/user/signin', {
 			method: 'POST',
 			mode: 'same-origin',
 			credentials: 'include',

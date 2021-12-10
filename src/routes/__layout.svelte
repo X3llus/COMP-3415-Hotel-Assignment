@@ -12,6 +12,7 @@
 	import { auth } from '$lib/authStore';
 	import { clickOutside } from '../lib/clickOutside.js';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	const inputList = {
 		BUTTON: 'button',
@@ -39,6 +40,7 @@
 		showList = false;
 		lastInput = inputList.OUTSIDE;
 		setTimeout(() => (lastInput = inputList.FRESH), 10);
+		goto('/');
 	}
 
 	onMount(async () => {
@@ -90,7 +92,7 @@
 			{:else}
 				<div class="flex items-center space-x-4">
 					<a
-						href="login"
+						href="signin"
 						class="py-1.5 px-2 text-black hover:text-gray-600 hover:drop-shadow-lg hover:filter transition duration-200 font-semibold"
 						>Sign In</a
 					>
@@ -114,7 +116,7 @@
 				</li> -->
 				{#if $auth && $auth.manager}
 					<li>
-						<a href="mDashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
+						<a href="manager/dashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
 					</li>
 				{:else}
 					<li>

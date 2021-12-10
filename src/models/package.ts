@@ -16,7 +16,7 @@ export declare interface Package{
     discount: boolean,
     description: string,
 
-    //login?(breakfast: boolean, holiday: boolean, discount: boolean, description: string): Promise<Package>;
+    //signin?(breakfast: boolean, holiday: boolean, discount: boolean, description: string): Promise<Package>;
 }
 
 var packageSchema = new Schema({

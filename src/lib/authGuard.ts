@@ -8,12 +8,13 @@ let guardedPages = [
 ];
 
 let manPages = [
-    '/mDashboard',
+    '/manager/dashboard',
 ]
 
 let unAuthPages = [
-    '/login',
+    '/signin',
     '/register',
+    '/manager/signin',
 ]
 
 enum AuthState {
