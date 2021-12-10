@@ -1,6 +1,6 @@
 import type { Guest } from '$models/Guest';
 import type { ErrorDescription } from 'mongodb';
-import { PackageResModel, Package } from '../../models/Package';
+import { PackageResModel, Package } from '../../models/package';
 
 interface Body {
     breakfast: Breakfast;
@@ -38,9 +38,10 @@ export async function post() {
 
 export async function put(body) {
     const {
-        guest,
-        dateString,
-        guestNb
+        breakfast,
+        holiday,
+        discount,
+        description
     }: Body = body;
     // const resDoc: Package = {
     //     guest, dateString, guestNb
