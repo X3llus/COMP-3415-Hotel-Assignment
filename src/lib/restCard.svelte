@@ -24,7 +24,7 @@ import { fade } from "svelte/transition";
 				guestNb
 			})
 		});
-		dispatch('update');
+		dispatch('restUpdate');
 		console.log('delete');
 	}
 </script>

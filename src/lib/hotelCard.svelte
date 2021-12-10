@@ -28,7 +28,7 @@ import { fade } from "svelte/transition";
 				guestNb
 			})
 		});
-		dispatch('update');
+		dispatch('hotelUpdate');
 		console.log('delete');
 	}
 </script>

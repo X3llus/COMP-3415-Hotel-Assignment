@@ -45,7 +45,7 @@
             <div class="grid grid-cols-5 grid-wrap p-3 gap-4">
                 <!-- CARDS -->
                 {#each hotelRes as hotel}
-                        <HotelCard {...hotel} on:update={hotelArray} />
+                        <HotelCard {...hotel} on:hotelUpdate={hotelArray} />
                     {:else}
                         <h1>No Reservations</h1>
                     {/each}
@@ -63,7 +63,7 @@
             <div class="grid grid-cols-5 grid-wrap p-3 gap-4">
                 <!-- CARDS -->
                     {#each restRes as res}
-                        <RestCard {...res} on:update={restArray} />
+                        <RestCard {...res} on:restUpdate={restArray} />
                     {:else}
                         <h1>No Reservations</h1>
                     {/each}
