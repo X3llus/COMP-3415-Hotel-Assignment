@@ -109,12 +109,19 @@
 			class="hidden origin-top-right absolute right-12 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
 		>
 			<ul class="py-1">
-				<li class="active">
+				<!-- <li class="active">
 					<a href="profile" class="block text-gray-700 px-4 py-2 text-sm">Profile</a>
-				</li>
-				<li>
-					<a href="dashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
-				</li>
+				</li> -->
+				{#if $auth && $auth.manager}
+					<li>
+						<a href="mDashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
+					</li>
+				{:else}
+					<li>
+						<a href="dashboard" class="block text-gray-700 px-4 py-2 text-sm">Dashboard</a>
+					</li>
+				{/if}
+				
 				<li>
 					<button on:click={() => signOut()} class="block text-gray-700 px-4 py-2 text-sm"
 						>Logout</button

@@ -8,7 +8,7 @@
     let restRes = [];
 
     onMount(async () => {
-        hotelArray()
+        hotelArray();
 		restArray();
 	});
     async function hotelArray() {
