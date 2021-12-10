@@ -1,10 +1,15 @@
 import type { Guest } from '$models/Guest';
+import type { ErrorDescription } from 'mongodb';
 import { PackageResModel, Package } from '../../models/Package';
 
 interface Body {
-    guest: Guest;
-    dateString: string;
-    guestNb: number;
+    breakfast: Breakfast;
+    holiday: Holiday;
+    discount: Discount;
+    description: Description;
+    // guest: Guest;
+    // dateString: string;
+    // guestNb: number;
 };
 
 //GET
