@@ -28,8 +28,9 @@ const HotelResSchema: Schema = new Schema({
 
 HotelResSchema.methods.createHotelRes = async function ( guest: Guest, startDate: Date, endDate: Date, guestNb: number): Promise<HotelRes> {
     await connect(uri), options ;
-
+    console.log(guest._id);    
     const res = new HotelResModel({
+        guest: guest._id,
         startDate,
         endDate,
         guestNb
