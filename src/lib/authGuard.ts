@@ -5,7 +5,7 @@ import type { LoadOutput } from '@sveltejs/kit/types/page';
 let guardedPages = [
     '/dashboard',
     '/resturantRes',
-    
+    '/hotelRes',
 ];
 
 let manPages = [
