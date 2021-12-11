@@ -59,3 +59,22 @@ export async function put(body) {
         }
     };
 }
+export async function del(req) {
+    const {
+        breakfast,
+        holiday,
+        discount,
+        description
+    } = req.body;
+    const resDoc: Package = {
+        breakfast, holiday, discount, description
+    };
+    const reservation = new PackageResModel(resDoc);
+    const reserved: Package = await reservation.deleteHotelRes(reservation);
+    return {
+        status: 200,
+        body: {
+            reserved
+        }
+    };
+}
