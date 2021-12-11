@@ -12,7 +12,7 @@
     async function roomsArray() {
         const response = await fetch('/api/manager/room');
         const body = await response.json();
-        rooms = body.res || [];
+        rooms = body.room || [];
         console.log('reload');
     }
 
@@ -48,11 +48,11 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				type: room.type,
-                lakeview: room.lakview,
-                btype: room.type,
-                beds: room.beds,
-                desc: room.desc
+				suite: room.suite,
+                lakeview: room.lakeview,
+                bedQnty: room.bedQnty,
+                bedType: room.bedType,
+                description: room.description
 			})
 		});
 		console.log('delete');
@@ -133,11 +133,23 @@
                 <tbody>
                     {#each rooms as room}
                         <tr class="bg-gray-100">
-                            <td class="px-4 py-1">{room.type}</td>
-                            <td class="px-4 py-1">{room.lakeview}</td>
-                            <td class="px-4 py-1">{room.type}</td>
-                            <td class="px-4 py-1">{room.beds}</td>
-                            <td class="px-4 py-1">{room.desc}</td>
+                            <td class="px-4 py-1">
+                                {#if room.type}
+                                    Suite
+                                {:else}
+                                    Base
+                                {/if}
+                            </td>
+                            <td class="px-4 py-1">
+                                {#if room.lakeview}
+                                    Yes
+                                {:else}
+                                    No
+                                {/if}
+                            </td>
+                            <td class="px-4 py-1">{room.bedQnty}</td>
+                            <td class="px-4 py-1">{room.bedType}</td>
+                            <td class="px-4 py-1">{room.description}</td>
                             <td class="px-4 py-1">
                                 <button
                                 class="py-1 px-5 item text-white rounded-lg shadow bg-red-600 hover:bg-red-700 font-bold transition duration-200"
