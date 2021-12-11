@@ -67,7 +67,7 @@
                 <label for="Description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={description} id="description" type="description">
             </div>          
-            <MainButton callback={() => create()} text ='Create Reservation' width='w-full'/>
+            <MainButton callback={() => create()} text ='Create Room' width='w-full'/>
         </form>
     </div>
 </main>
