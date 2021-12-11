@@ -2,12 +2,12 @@
 	import { goto } from '$app/navigation';
 	import { auth } from '../lib/authStore';
 
-	import CustomInput from '$lib/customInput.svelte';
+	//import CustomInput from '$lib/customInput.svelte';
 	import MainButton from '$lib/mainButton.svelte';
 
-	let breakfast = '';
-	let holiday = '';
-    let discount = '';
+	let breakfast = false;
+	let holiday = false;
+    let discount = false;
     let description = '';
     let breakPack = 1;
 
@@ -47,20 +47,19 @@
         <h3> Select from the Options Below:</h3><br>
 		<form>
             <label>
-                <input type=radio  name="breakfast" value={1}>
+                <input type=checkbox  name="breakfast" bind:checked={breakfast}>
                 Breakfast Package<br>
             </label>
             <label>
-                <input type=radio  name="holiday" value={1}>
+                <input type=checkbox  name="holiday" bind:checked={holiday}>
                 Holiday Package<br>
             </label>
             <label>
-                <input type=radio  name="discount" value={1}>
+                <input type=checkbox  name="discount" bind:checked={discount}>
                 Discount
             </label>
             <label>
-                <textarea id="Desc" name="description" placeholder="Description" rows="4" cols="35">Description
-                </textarea>
+                <textarea id="Desc" name="description" placeholder="Description" rows="4" cols="35" bind:value={description}></textarea>
             </label>
             <MainButton callback={() => pack()} text ='Create Package' width='w-full'/>
 		</form>

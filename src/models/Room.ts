@@ -9,7 +9,7 @@ const options = {
 };
 
 export declare interface Room{
-    suite: string,
+    suite: boolean,
     lakeview: boolean,
     bedQnty: number,
     bedType: string,
@@ -17,14 +17,14 @@ export declare interface Room{
 }
 
 export const roomSchema = new Schema({
-    suite: { type: String, required: true },
-    lakeview: { type: Boolean, required: true },
+    suite: { type: Boolean, required: false },
+    lakeview: { type: Boolean, required: false },
     bedQnty: { type: Number, required: true },
     bedType: { type: String, required: true },
     description: { type: String },
 });
 
-roomSchema.methods.createRoom = async function ( suite: string, lakeview: boolean, bedQnty: number, bedType: string, description: string): Promise<Room> {
+roomSchema.methods.createRoom = async function ( suite: boolean, lakeview: boolean, bedQnty: number, bedType: string, description: string): Promise<Room> {
     await connect(uri), options ;
     
     const res = new RoomModel({
@@ -39,13 +39,10 @@ roomSchema.methods.createRoom = async function ( suite: string, lakeview: boolea
     return room;
 }
  
-roomSchema.methods.getRoom = async function (link: Guest): Promise<Room[]> {
+roomSchema.methods.getRoom = async function (): Promise<Room[]> {
     await connect(uri), options;
 
-    const room: Room[] = await RoomModel.find({
-        link: link
-    });
-
+    const room: Room[] = await RoomModel.find();
     return room
 }
 

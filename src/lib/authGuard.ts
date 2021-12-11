@@ -5,18 +5,19 @@ import type { LoadOutput } from '@sveltejs/kit/types/page';
 let guardedPages = [
     '/dashboard',
     '/resturantRes',
-    
+    '/hotelRes',
 ];
 
 let manPages = [
     '/manager/dashboard',
+    '/manager/createRoom',
+    '/packageForm',
 ]
 
 let unAuthPages = [
     '/signin',
     '/register',
     '/manager/signin',
-    '/packageForm',
 ]
 
 enum AuthState {
