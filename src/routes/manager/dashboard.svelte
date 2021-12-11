@@ -31,9 +31,10 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				name: pac.name,
-				type: pac.type,
-                desc: pac.desc
+				breakfast: pac.breakfast,
+                holiday: pac.holiday,
+                discount: pac.discount,
+                description: pac.description,
 			})
 		});
 		console.log('delete');
