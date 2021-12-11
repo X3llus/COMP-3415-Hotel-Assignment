@@ -87,8 +87,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each packages as pac}
-                        <tr class="bg-gray-100">
+                    {#each packages as pac , i}
+                        <tr class="{ (i%2 == 0) ? "bg-gray-100" : "bg-gray-200" }">
                             <td class="px-4 py-1">
                                 {#if pac.breakfast}
                                     Breakfast
@@ -108,7 +108,6 @@
                             >
                                 Delete
                             </button></td>
-
                         </tr>
                     {:else}
                         <td class="px-4 py-1">N/A</td>
@@ -133,8 +132,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each rooms as room}
-                        <tr class="bg-gray-100">
+                    {#each rooms as room, i}
+                        <tr class="{ (i%2 == 0) ? "bg-gray-100" : "bg-gray-200" }">
                             <td class="px-4 py-1">
                                 {#if room.type}
                                     Suite
