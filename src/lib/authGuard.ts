@@ -10,6 +10,7 @@ let guardedPages = [
 
 let manPages = [
     '/manager/dashboard',
+    '/manager/createRoom',
 ]
 
 let unAuthPages = [
