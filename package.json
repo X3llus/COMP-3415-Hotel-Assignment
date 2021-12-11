@@ -40,6 +40,7 @@
     "@types/mongoose": "^5.11.97",
     "aws-sdk": "^2.1046.0",
     "bcrypt": "^5.0.1",
+    "bson-ext": "^4.0.2",
     "cookie": "^0.4.1",
     "dotenv": "^10.0.0",
     "mock-aws-s3": "^4.0.2",
