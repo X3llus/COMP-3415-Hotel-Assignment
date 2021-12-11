@@ -70,7 +70,7 @@ export async function del(req) {
         breakfast, holiday, discount, description
     };
     const reservation = new PackageResModel(resDoc);
-    const reserved: Package = await reservation.deleteHotelRes(reservation);
+    const reserved: Package = await reservation.deletePackageRes(reservation);
     return {
         status: 200,
         body: {
