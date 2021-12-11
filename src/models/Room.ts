@@ -39,13 +39,10 @@ roomSchema.methods.createRoom = async function ( suite: boolean, lakeview: boole
     return room;
 }
  
-roomSchema.methods.getRoom = async function (link: Guest): Promise<Room[]> {
+roomSchema.methods.getRoom = async function (): Promise<Room[]> {
     await connect(uri), options;
 
-    const room: Room[] = await RoomModel.find({
-        link: link
-    });
-
+    const room: Room[] = await RoomModel.find();
     return room
 }
 

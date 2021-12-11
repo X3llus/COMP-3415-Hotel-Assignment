@@ -10,21 +10,21 @@
     });
 
     async function roomsArray() {
-        const response = await fetch('/api/room');
+        const response = await fetch('/api/manager/room');
         const body = await response.json();
         rooms = body.res || [];
         console.log('reload');
     }
 
     async function packageArray() {
-        const response = await fetch('/api/packageForm');
+        const response = await fetch('/api/package');
         const body = await response.json();
         packages = body.res || [];
         console.log('reload');
     }
 
     async function pacDel(pac) {
-		const responseR = await fetch('api/packageForm', {
+		const responseR = await fetch('api/package', {
 			method: 'DELETE',
 			mode: 'same-origin',
 			headers: {
@@ -40,7 +40,7 @@
 	}
 
     async function roomDel(room) {
-		const responseR = await fetch('api/room', {
+		const responseR = await fetch('api/manager/room', {
 			method: 'DELETE',
 			mode: 'same-origin',
 			headers: {
@@ -78,7 +78,6 @@
             <table class="table-auto rounded-lg overflow-hidden shadow-md">
                 <thead>
                     <tr class="bg-gray-300 text-gray-700">
-                        <th class="px-4 py-1">Name</th>
                         <th class="px-4 py-1">Type</th>
                         <th class="px-4 py-1">Description</th>
                         <th class="px-4 py-1">Delete</th>
@@ -87,9 +86,18 @@
                 <tbody>
                     {#each packages as pac}
                         <tr class="bg-gray-100">
-                            <td class="px-4 py-1">{pac.name}</td>
-                            <td class="px-4 py-1">{pac.type}</td>
-                            <td class="px-4 py-1">{pac.desc}</td>
+                            <td class="px-4 py-1">
+                                {#if pac.breakfast}
+                                    Breakfast
+                                {:else if pac.discout}
+                                    Discount
+                                {:else if pac.holiday}
+                                    Holiday
+                                {:else}
+                                    N/A
+                                {/if}
+                            </td>
+                            <td class="px-4 py-1">{pac.description}</td>
                             <td class="px-4 py-1">
                                 <button
                                 class="py-1 px-5 item text-white rounded-lg shadow bg-red-600 hover:bg-red-700 font-bold transition duration-200"

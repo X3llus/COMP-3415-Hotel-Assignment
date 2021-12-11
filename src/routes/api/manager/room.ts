@@ -29,9 +29,10 @@ export async function post(req) {
     };
 }
 
-export async function get(req) {
+export async function get() {
     const newRoom = new RoomModel();
     const room: Room[] = await newRoom.getRoom();
+    console.log(room);
     return {
         body: {
             room
