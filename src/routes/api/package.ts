@@ -2,15 +2,12 @@ import type { Guest } from '$models/Guest';
 import type { ErrorDescription } from 'mongodb';
 import { PackageResModel, Package } from '../../models/package';
 
-interface Body {
-    breakfast: Breakfast;
-    holiday: Holiday;
-    discount: Discount;
-    description: Description;
-    // guest: Guest;
-    // dateString: string;
-    // guestNb: number;
-};
+// interface Body {
+//     breakfast: Breakfast;
+//     holiday: Holiday;
+//     discount: Discount;
+//     description: Description;
+// };
 
 //GET
 export async function get() {
@@ -24,10 +21,16 @@ export async function get() {
     }
 }
 
-export async function post() {
-    const date: Date = new Date();
+export async function post(req) {
+    const {
+        breakfast,
+        holiday,
+        discount,
+        description,
+    } = req.body;
     const reservation = new PackageResModel();
-    const reserved: Package = await reservation.createPackageRes();
+    console.log(req.body);
+    const reserved: Package = await reservation.createPackageRes(breakfast, holiday, discount, description);
     return {
         status: 200,
         body: {

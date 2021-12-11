@@ -23,7 +23,7 @@ var packageSchema = new Schema({
     breakfast: { type: Boolean, required: true },
     holiday: { type: Boolean, required: true },
     discount: { type: Boolean, required: true },
-    description: { type: String, required: true },
+    description: { type: String},
 });
 
 //CREATE

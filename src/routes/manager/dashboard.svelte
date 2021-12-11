@@ -17,14 +17,14 @@
     }
 
     async function packageArray() {
-        const response = await fetch('/api/package');
+        const response = await fetch('/api/packageForm');
         const body = await response.json();
         packages = body.res || [];
         console.log('reload');
     }
 
     async function pacDel(pac) {
-		const responseR = await fetch('api/package', {
+		const responseR = await fetch('api/packageForm', {
 			method: 'DELETE',
 			mode: 'same-origin',
 			headers: {

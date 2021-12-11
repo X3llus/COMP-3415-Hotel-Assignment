@@ -11,13 +11,13 @@ let guardedPages = [
 let manPages = [
     '/manager/dashboard',
     '/manager/createRoom',
+    '/manager/packageForm',
 ]
 
 let unAuthPages = [
     '/signin',
     '/register',
     '/manager/signin',
-    '/packageForm',
 ]
 
 enum AuthState {
