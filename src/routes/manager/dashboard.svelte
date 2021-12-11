@@ -24,7 +24,7 @@
     }
 
     async function pacDel(pac) {
-		const responseR = await fetch('api/package', {
+		const responseR = await fetch('/api/package', {
 			method: 'DELETE',
 			mode: 'same-origin',
 			headers: {
@@ -37,11 +37,12 @@
                 description: pac.description,
 			})
 		});
+        packageArray();
 		console.log('delete');
 	}
 
     async function roomDel(room) {
-		const responseR = await fetch('api/manager/room', {
+		const responseR = await fetch('/api/manager/room', {
 			method: 'DELETE',
 			mode: 'same-origin',
 			headers: {
@@ -55,6 +56,7 @@
                 description: room.description
 			})
 		});
+        roomsArray();
 		console.log('delete');
 	}
 </script>
