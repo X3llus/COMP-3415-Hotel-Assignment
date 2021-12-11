@@ -65,7 +65,7 @@
     </div>
     <div class="flex justify-center space-x-5">
             <button class="py-1 px-3 item text-white rounded-lg shadow bg-green-600 hover:bg-green-700 font-bold transition duration-200">
-                <a href="package" class="">+ Package</a>
+                <a href="/packageForm" class="">+ Package</a>
             </button>
             <button class="py-1 px-3 item text-white rounded-lg shadow bg-blue-600 hover:bg-blue-700 font-bold transition duration-200">
                 <a href="room" class="">+ Room</a>
