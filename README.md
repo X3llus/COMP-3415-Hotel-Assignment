@@ -10,6 +10,8 @@ This project is a group project written by @X3llus @jona8780 @Adam882094 and @ni
 We created this for COMP-3415 as our semester long group project and it is meant to act as a hotel management and reservation system.
 We built this using Sveltekit and tailwindcss and are hosting it on Vercel using CI.
 
+NOTE: to signin as a manager please go to /manager/signin
+
 
 <h2 id="running">Running</h2>
 There are multiple ways to run the program.
