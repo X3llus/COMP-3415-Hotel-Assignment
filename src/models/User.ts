@@ -79,11 +79,7 @@ UserSchema.methods.guestSignin = async function (email: string, password: string
     console.log(checkPass);
 
     if (checkPass) {
-        checkUser.token = uuidv4();
-        const finalUser = await checkUser.save();
-        console.log(finalUser);
-        
-        return finalUser;
+        return checkUser;
     }
     return null;
 }
@@ -98,11 +94,7 @@ UserSchema.methods.managerSignin = async function (email: string, password: stri
     console.log(checkPass);
 
     if (checkPass) {
-        checkUser.token = uuidv4();
-        const finalUser = await checkUser.save();
-        console.log(finalUser);
-        
-        return finalUser;
+        return checkUser;
     }
     return null;
 }
