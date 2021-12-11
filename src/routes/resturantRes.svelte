@@ -10,7 +10,7 @@ import { isValidObjectId } from 'mongoose';
     let dateTime;
     let guestNb = 0;
 
-    let meals = ['Breakfast', 'Lunch', 'Dinner'];
+    let meals = ['breakfast', 'lunch', 'dinner'];
     let meal= '';
     let breakfast = ['-:--','8:00','8:30','9:00','9:30'];
     let lunch = ['-:--','12:00','12:30','13:00'];
@@ -56,7 +56,7 @@ import { isValidObjectId } from 'mongoose';
 <main class="flex justify-around">
     <div class="relative rounded-2xl py-4 border dark:border-gray-800 mt-8 px-8 pt-6 pb-8 w-5/6 sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/4">
         <div class="flex justify-around">
-            <h1 class="text-3xl">Resturant Reservation</h1>
+            <h1 class="text-3xl">Restaurant Reservation</h1>
         </div>
         <form>
             <div class="mb-6">
@@ -78,15 +78,15 @@ import { isValidObjectId } from 'mongoose';
             <div class="mb-6">
                 <label for="Time" class="block text-gray-700 text-sm font-bold mb-2">Time</label>
                 <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" bind:value={timeString} id="time" type="time" name="time">
-                {#if meal == 'Breakfast'}
+                {#if meal == 'breakfast'}
                     {#each breakfast as time}
                         <option value={time}>{time}</option>
                     {/each}
-                {:else if meal == 'Lunch'}
+                {:else if meal == 'lunch'}
                     {#each lunch as time}
                         <option value={time}>{time}</option>
                     {/each}
-                {:else if meal == 'Dinner'}
+                {:else if meal == 'dinner'}
                     {#each dinner as time}
                         <option value={time}>{time}</option>
                     {/each}
